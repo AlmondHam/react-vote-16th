@@ -41,7 +41,7 @@ async({navigate, data}:any)=>{
         //console.log(document.cookie);
         if(accessToken !== undefined)
         {
-            Router.push("/blank");
+            Router.push("/vote");
         }
         return res.data.data.access_token
     } catch(error:any){

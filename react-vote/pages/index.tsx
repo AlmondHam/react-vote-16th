@@ -90,43 +90,43 @@ const Form = styled.div`
   align-items: center;
   flex-direction: column;
   border: 1px solid gainsboro;
-  margin-left:480px;
+  margin-left: 480px;
 `;
 
 const IdInput = styled.input`
-margin: 5px;
+  margin: 5px;
   padding: 3px;
   border: 1px solid gainsboro;
   width: 30rem;
   height: 3rem;
   border-radius: 10px;
   margin: 10px 0px 10px 0px;
-`
+`;
 
 const PwInput = styled.input`
-margin: 5px;
+  margin: 5px;
   padding: 3px;
   border: 1px solid gainsboro;
   width: 30rem;
   height: 3rem;
   border-radius: 10px;
   margin: 10px 0px 10px 0px;
-`
+`;
 
-const Button =styled.button`
-    margin: 5px;
+const Button = styled.button`
+  margin: 5px;
   padding: 3px;
   border: 1px solid gainsboro;
   width: 30rem;
   height: 3rem;
   border-radius: 10px;
   margin: 10px 0px 10px 0px;
-  background-color:white;
-  color:black;
-  &:hover{
-        background: grey;
-    }
-    &:active{
-        background: grey;
-    }
-`
+  background-color: white;
+  color: black;
+  &:hover {
+    background: grey;
+  }
+  &:active {
+    background: grey;
+  }
+`;
