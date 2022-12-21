@@ -3,11 +3,9 @@ import Link from 'next/link';
 import axios from 'axios';
 import Router from 'next/router';
 
-import Candidate from '../../components/Candidate';
-
 import api from '../../api';
+import { useSelector } from 'react-redux';
 import { getCookie, removeCookie } from '../../util/cookie';
-import { Navigate } from 'react-router-dom';
 
 const Vote = () => {
   interface CandidateProps {
@@ -19,7 +17,7 @@ const Vote = () => {
   const [cand, setCand] = useState<CandidateProps[] | null>(null);
   const [teams, setTeams] = useState([]);
 
-const fetchCandidates = async () => {
+  const fetchCandidates = async () => {
     try {
       const response = await api.get('/candidates/');
       setCand(response.data);
@@ -28,7 +26,7 @@ const fetchCandidates = async () => {
     }
   };
 
-const fetchTeams = async () => {
+  const fetchTeams = async () => {
     try {
       const response = await api.get('/teams/');
       setTeams(response.data);
@@ -37,7 +35,7 @@ const fetchTeams = async () => {
     }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     if (getCookie('is_login') === undefined) {
       alert('로그인 후 접속');
       Router.push('/');
@@ -45,17 +43,20 @@ const fetchTeams = async () => {
       fetchCandidates();
       fetchTeams();
     }
-  },[])
-  
+  }, []);
 
   const LogOut = () => {
     removeCookie('is_login');
     Router.push('/');
   };
 
-  console.log(cand);
+  const [team, setTeam] = useState('FE');
 
-  const team = 'FE';
+  const data = useSelector((state: any) => state.joinSlice.joinData);
+
+  useEffect(() => {
+    setTeam(data.team);
+  }, []);
 
   return (
     <div className="container">
@@ -70,7 +71,9 @@ const fetchTeams = async () => {
         }}
         as={`/vote/${team}`}
       >
-        <div className="vote-btn">FE 투표하기</div>
+        <button className="vote-btn" disabled={team !== 'FE'}>
+          FE 투표하기
+        </button>
       </Link>
       <Link
         href={{
@@ -83,7 +86,7 @@ const fetchTeams = async () => {
         }}
         as={`/result/FE`}
       >
-        <div className="vote-btn">FE 결과보기</div>
+        <button className="vote-btn">FE 결과보기</button>
       </Link>
 
       <Link
@@ -97,7 +100,9 @@ const fetchTeams = async () => {
         }}
         as={`/vote/BE`}
       >
-        <div className="vote-btn">BE 투표하기</div>
+        <button className="vote-btn" disabled={team !== 'BE'}>
+          BE 투표하기
+        </button>
       </Link>
       <Link
         href={{
@@ -110,7 +115,7 @@ const fetchTeams = async () => {
         }}
         as={`/result/BE`}
       >
-        <div className="vote-btn">BE 결과보기</div>
+        <button className="vote-btn">BE 결과보기</button>
       </Link>
       <Link
         href={{
@@ -121,11 +126,11 @@ const fetchTeams = async () => {
         }}
         as={`/vote/final`}
       >
-        <div className="vote-btn">
+        <button className="vote-btn">
           데모데이
           <br />
           투표하기
-        </div>
+        </button>
       </Link>
       <Link
         href={{
@@ -136,14 +141,14 @@ const fetchTeams = async () => {
         }}
         as={`/result/final`}
       >
-        <div className="vote-btn">
+        <button className="vote-btn">
           데모데이 <br /> 결과보기
-        </div>
+        </button>
       </Link>
       <button onClick={LogOut}>logOut</button>
       <style jsx>{`
         .vote-btn {
-          width: 10em;
+          width: 12em;
           height: 10rem;
           padding: 2rem;
           border: 1px solid white;

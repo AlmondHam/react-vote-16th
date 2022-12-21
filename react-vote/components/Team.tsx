@@ -9,6 +9,7 @@ const Team = (team: any) => {
       });
     } catch (error) {
       console.log(error);
+      alert('이미 투표하셨습니다!');
     }
   };
 
