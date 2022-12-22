@@ -50,13 +50,7 @@ const Vote = () => {
     Router.push('/');
   };
 
-  const [team, setTeam] = useState('FE');
-
-  const data = useSelector((state: any) => state.joinSlice.joinData);
-
-  useEffect(() => {
-    setTeam(data.team);
-  }, []);
+  const team = 'FE';
 
   return (
     <div className="container">
